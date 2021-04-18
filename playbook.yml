@@ -47,6 +47,16 @@
         line: 'PermitRootLogin prohibit-password'
 
     # Install Packages
+    - name: Add tailscale apt key 
+      apt_key:
+        url: "{{ tailscale_apt_signkey }}"  
+        state: present
+      
+    - name: Add tailscale repostiory
+      apt_repository:
+        repo: "{{ tailscale_apt_deb }}"
+        state: present
+
     - name: Update apt
       apt: update_cache=yes
 

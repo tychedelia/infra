@@ -9,24 +9,13 @@ const vpc = new digitalocean.Vpc("jem-prod", {
     region: digitalocean.Regions.SFO3,
 });
 
-const keyFingerprint = cfg.requireSecret("ssh-fingerprint");
-const tailscaleToken = cfg.requireSecret("tailscale-token");
-
 const relay = new digitalocean.Droplet("jem-prod-relay", {
     region: digitalocean.Regions.SFO3,
     privateNetworking: true,
     vpcUuid: vpc.id,
     size: digitalocean.DropletSlugs.DropletS2VCPU2GB,
     image: "ubuntu-20-04-x64",
-    sshKeys: [keyFingerprint],
-    userData: pulumi.interpolate `
-    #!/bin/bash
-
-    apt-get update
-    apt-get install tailscale
-    systemctl enable --now tailscaled
-    tailscale up --advertise-routes=10.0.0.0/24,10.0.1.0/24 --authkey=${tailscaleToken}
-    `,
+    sshKeys: [cfg.requireSecret("ssh-fingerprint")],
     tags: [tag.id]
 });
 
