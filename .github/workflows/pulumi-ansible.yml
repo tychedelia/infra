@@ -1,0 +1,40 @@
+name: pulumi-ansible
+
+on:
+  push:
+    branches: [ "main" ]
+
+jobs:
+  pulumi-ansible:
+    runs-on: ubuntu-latest
+    env:
+      DIGITALOCEAN_TOKEN: ${{ secrets.DIGITALOCEAN_TOKEN }}
+      PULUMI_ACCESS_TOKEN: ${{ secrets.PULUMI_ACCESS_TOKEN }}
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+
+      - name: Cache
+        uses: actions/cache@v2
+        with:
+          path: ~/.npm
+          key: ${{ runner.os }}-node-${{ hashFiles('**/package-lock.json') }}
+          restore-keys: |
+            ${{ runner.os }}-node-
+
+      - name: Install Pulumi CLI
+        uses: pulumi/action-install-pulumi-cli@v1.0.2
+
+      - name: Setup node
+        uses: actions/setup-node@v2
+        with:
+          node-version: '14'
+
+      - name: Install deps and setup 
+        run: |
+          npm install
+          pulumi login
+          pulumi stack select prod
+
+      - name: Run makefile 
+        run: make build 

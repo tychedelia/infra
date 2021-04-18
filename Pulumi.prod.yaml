@@ -1,0 +1,10 @@
+config:
+  digitalocean:token:
+    secure: AAABAFsn7Dc7c+PefpfNRzTE3tJ5qBnAdGwMFAotXv7qFsgeoCDolX/xlE25xeojJy7RzBet/+lx+jGzeQKALYzTO605j0QctdpCXKJkGTnvmGoYycirws7ydPev8KJz
+  jem-prod:ssh-fingerprint: 0c:b7:46:49:03:8e:93:14:d1:6c:65:61:8b:0d:36:61
+  jem-prod:tailscale-token:
+    secure: AAABAGk5diCn9RIS8gpSbD3NIwxXNCvvAGGMqd8G/XnigIuKiEA4HfonXM3UW6tghxJ/TbYE6svim9oXvco=
+  jem-rpod:tailscale-token:
+    secure: AAABAFl+imRo3QzYkHZRsmFb1KyDmy5S0pPu/JeFYhRpcpDof0UnPu83rVQGoSKoyoKdTlNH38bFdB1cU+8=
+  tailscale:token:
+    secure: AAABALG2bGUbi7/72bBoYN47CCnS/znCniiOvOU2YD0TMRgcHP4fQD+FVG7KvUpbXWqj1vqG6Yof1ERTNd0=
