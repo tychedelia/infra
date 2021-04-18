@@ -17,6 +17,7 @@ pulumi-destroy:
 
 .PHONY: ansible
 ansible:
+	@mkdir -p ~/.shh
 	@ssh-keyscan -H $$(pulumi stack output relayIp) >> ~/.ssh/known_hosts
 	@ansible-playbook \
 		--inventory $$(pulumi stack output relayIp),\
