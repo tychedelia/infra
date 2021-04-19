@@ -43,6 +43,9 @@ jobs:
       - name: Bring stack up
         run: make pulumi-up
 
+      - name: Sleep for droplet to start
+        run: sleep 15
+
       - name: SSH keyscan
         run: ssh-keyscan $(pulumi stack output relayIp)
 
