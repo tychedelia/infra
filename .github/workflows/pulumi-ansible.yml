@@ -31,16 +31,26 @@ jobs:
         with:
           node-version: '14'
 
-      - name: Install SSH key
-        uses: shimataro/ssh-key-action@v2
-        with:
-          key: ${{ secrets.SSH_KEY }}
-
       - name: Install deps and setup 
         run: |
           npm install
           pulumi login
           pulumi stack select prod
 
-      - name: Run makefile 
-        run: make build 
+      - name: Destroy existing stack 
+        run: make pulumi-destroy
+      
+      - name: Bring stack up
+        run: make pulumi-up
+
+      - name: SSH keyscan
+        run: ssh-keyscan $(pulumi stack output relayIp)
+
+      - name: Install SSH Key
+        uses: shimataro/ssh-key-action@v2
+        with:
+          key: ${{ secrets.SSH_KEY }}
+
+      - name: Run ansible against relay
+        run: make ansible
+
