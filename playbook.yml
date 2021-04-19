@@ -57,7 +57,7 @@
     
     - name: Add Docker apt key 
       apt_key:
-        url: "{{ dockeR_apt_signkey }}" 
+        url: "{{ docker_apt_signkey }}" 
         state: present
 
     - name: Add Docker repository
