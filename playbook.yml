@@ -6,9 +6,6 @@
     - vars/default.yml
 
   tasks:
-    - name: Install Prerequisites
-      apt: name=aptitude update_cache=yes state=latest force_apt_get=yes
-
     # Sudo
     - name: Make sure we have a 'wheel' group
       group:
