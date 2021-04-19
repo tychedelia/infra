@@ -55,7 +55,10 @@ jobs:
           key: ${{ secrets.SSH_KEY }}
           known_hosts: unnecessary
 
-      - name: Run ansible against relay
+      - name: Write vault password
         env:
-          SSH_PUB_KEY: ${{ secrets.SSH_PUB_KEY }}
-        run: make ansible ansible_extra_args="--extra-vars 'ssh_pub_key=$SSH_PUB_KEY'"
+          VAULT_PASS: ${{ secrets.VAULT_PASS }}
+        run: echo $VAULT_PASS > ./vault_pass.txt
+
+      - name: Run ansible against relay
+        run: make ansible ansible_extra_args="--vault-password-file ./vault_pass.txt"

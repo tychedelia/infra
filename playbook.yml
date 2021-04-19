@@ -4,6 +4,7 @@
   become_user: root
   vars_files:
     - vars/default.yml
+    - vault.yml
 
   tasks:
     # Sudo
