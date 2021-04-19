@@ -55,6 +55,9 @@
         repo: "{{ tailscale_apt_deb }}"
         state: present
 
+    - name: Wait for any possibly running unattended upgrade to finish
+      raw: systemd-run --property="After=apt-daily.service apt-daily-upgrade.service" --wait /bin/true
+    
     - name: Update apt
       apt: update_cache=yes
 
