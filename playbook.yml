@@ -55,8 +55,12 @@
         repo: "{{ tailscale_apt_deb }}"
         state: present
 
-    - name: Wait for any possibly running unattended upgrade to finish
-      raw: systemd-run --property="After=apt-daily.service apt-daily-upgrade.service" --wait /bin/true
+    - name: Wait for automatic system updates
+      become: true
+      shell: while sudo fuser /var/lib/dpkg/{{ item }} >/dev/null 2>&1; do sleep 1; done;
+      with_items:
+        - lock
+        - lock-frontend
     
     - name: Update apt
       apt: update_cache=yes
