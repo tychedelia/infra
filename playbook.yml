@@ -54,6 +54,16 @@
       apt_repository:
         repo: "{{ tailscale_apt_deb }}"
         state: present
+    
+    - name: Add Docker apt key 
+      apt_key:
+        url: "{{ dockeR_apt_signkey }}" 
+        state: present
+
+    - name: Add Docker repository
+      apt_repository:
+        repo: "{{ docker_apt_deb }}" 
+        state: present
 
     - name: Wait for automatic system updates
       become: true
@@ -61,7 +71,7 @@
       with_items:
         - lock
         - lock-frontend
-    
+
     - name: Update apt
       apt: update_cache=yes
 
