@@ -1,4 +1,4 @@
-name: pulumi-ansible
+name: deploy 
 
 on:
   push:
@@ -37,8 +37,8 @@ jobs:
           pulumi login
           pulumi stack select prod
 
-      - name: Destroy existing stack 
-        run: make pulumi-destroy
+      # - name: Destroy existing stack 
+      #   run: make pulumi-destroy
       
       - name: Bring stack up
         run: make pulumi-up
@@ -47,7 +47,7 @@ jobs:
         run: sleep 15
 
       - name: SSH keyscan
-        run: ssh-keyscan $(pulumi stack output relayIp)
+        run: ssh-keyscan $(pulumi stack output dropletIp)
 
       - name: Install SSH Key
         uses: shimataro/ssh-key-action@v2

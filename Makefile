@@ -20,6 +20,6 @@ ansible_extra_args:=
 .PHONY: ansible
 ansible:
 	@ANSIBLE_HOST_KEY_CHECKING=false ansible-playbook \
-		--inventory $$(pulumi stack output relayIp),\
+		--inventory $$(pulumi stack output dropletIp),\
 		$(ansible_extra_args) \
 		--user=root playbook.yml
