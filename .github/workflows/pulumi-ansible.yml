@@ -43,7 +43,7 @@ jobs:
       - name: Bring stack up
         run: make pulumi-up
 
-      - name: Sleep for droplet to start
+      - name: Wait for droplet to start
         run: sleep 15
 
       - name: SSH keyscan
@@ -53,7 +53,7 @@ jobs:
         uses: shimataro/ssh-key-action@v2
         with:
           key: ${{ secrets.SSH_KEY }}
-          known_hosts: ""
+          known_hosts: unnecessary
 
       - name: Run ansible against relay
         run: make ansible
