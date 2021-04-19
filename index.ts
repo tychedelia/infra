@@ -2,7 +2,6 @@ import * as pulumi from "@pulumi/pulumi";
 import * as digitalocean from "@pulumi/digitalocean";
 
 const cfg = new pulumi.Config("jem-prod")
-
 const tag = new digitalocean.Tag("jem-prod");
 
 const vpc = new digitalocean.Vpc("jem-prod", {

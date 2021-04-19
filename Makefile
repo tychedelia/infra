@@ -15,8 +15,11 @@ pulumi-up:
 pulumi-destroy:
 	@pulumi destroy --yes
 
+ansible_extra_args:=
+
 .PHONY: ansible
 ansible:
 	@ANSIBLE_HOST_KEY_CHECKING=false ansible-playbook \
 		--inventory $$(pulumi stack output relayIp),\
-		--user=root \playbook.yml
+		$(ansible_extra_args) \
+		--user=root playbook.yml

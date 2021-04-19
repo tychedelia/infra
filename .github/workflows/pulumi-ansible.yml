@@ -56,5 +56,5 @@ jobs:
           known_hosts: unnecessary
 
       - name: Run ansible against relay
-        run: make ansible
+        run: make ansible ansible_extra_args='--extra-vars "ssh_pub_key=${{ secrets.SSH_PUB_KEY }}"'
 

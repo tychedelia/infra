@@ -1,6 +1,6 @@
 ---
 default_user: jem
-copy_local_key: "{{ lookup('file', lookup('env','HOME') + '/.ssh/id_rsa.pub') }}"
+ssh_key: "{{ lookup('file', lookup('env','HOME') + '/.ssh/id_rsa.pub') }}"
 sys_packages: [ 'curl', 'vim', 'git', 'tailscale']
 tailscale_apt_deb: deb https://pkgs.tailscale.com/stable/ubuntu focal main
 tailscale_apt_signkey: https://pkgs.tailscale.com/stable/ubuntu/focal.gpg
